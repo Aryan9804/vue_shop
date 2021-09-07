@@ -8,6 +8,11 @@ import './assets/css/globel.css'
 import axios from 'axios'
 // 设置访问基本路径
 axios.defaults.baseURL = 'http://timemeetyou.com:8889/api/private/v1/'
+axios.interceptors.request.use(config => {
+  config.headers.Authorization = sessionStorage.getItem('token')
+  // console.log(config);
+  return config
+})
 // 在Vue的原型上添加一个属性，让每一个组件都能访问到http来使用axios
 Vue.prototype.$http = axios
 
@@ -15,5 +20,9 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
-  render: h => h(App)
+  render: h => h(App),
+  // 安装全局事件总线
+  beforeCreate() {
+    Vue.prototype.$bus = this
+  }
 }).$mount('#app')
