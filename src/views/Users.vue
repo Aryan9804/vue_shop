@@ -62,7 +62,6 @@
             <el-tooltip class="item" effect="dark" content="分配角色" placement="top">
               <el-button type="warning" icon="el-icon-setting" size="mini" circle @click="setRole(scope.row)"></el-button>
             </el-tooltip>
-
           </template>
         </el-table-column>
       </el-table>
@@ -434,13 +433,13 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$http.delete(`/users/` + id).then((response)=> {
-          if(response.data.meta.status !== 200){
+        this.$http.delete(`/users/` + id).then((response) => {
+          if (response.data.meta.status !== 200) {
             return this.$message.error(response.data.meta.msg)
           }
           this.$message.success('删除用户成功！')
           this.getUserList()
-        }).catch((error)=> {
+        }).catch((error) => {
           this.$message.error(error.msg)
         })
         //  this.$message({
@@ -467,7 +466,7 @@ export default {
       if (!this.selectedRoleId) {
         return this.$message.error('请选择要分配的角色')
       }
-      const { data: res } = await this.$http.put(`users/${this.userInfo.id}/role`, {rid: this.setRole})
+      const { data: res } = await this.$http.put(`users/${this.userInfo.id}/role`, { rid: this.setRole })
       if (res.meta.status !== 200) {
         this.$message.error('分配角色失败！')
       }

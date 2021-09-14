@@ -6,6 +6,8 @@ import './plugins/element.js'
 import './assets/css/globel.css'
 // 导入axios
 import axios from 'axios'
+// 导入vue-table-with-tree-grid组件
+import ZkTable from 'vue-table-with-tree-grid'
 // 设置访问基本路径
 axios.defaults.baseURL = 'http://timemeetyou.com:8889/api/private/v1/'
 axios.interceptors.request.use(config => {
@@ -17,6 +19,8 @@ axios.interceptors.request.use(config => {
 Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
+// 注册
+Vue.component('ZkTable', ZkTable)
 
 new Vue({
   router,

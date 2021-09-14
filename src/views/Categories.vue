@@ -8,11 +8,11 @@
 export default {
   name: 'Categories',
   data () {
-   return {
+    return {
 
     }
   },
-  methods:{
+  methods: {
 
   }
 }

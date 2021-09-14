@@ -8,11 +8,11 @@
 export default {
   name: 'Params',
   data () {
-   return {
+    return {
 
     }
   },
-  methods:{
+  methods: {
 
   }
 }
