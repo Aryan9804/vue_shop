@@ -8,3 +8,32 @@ html, body, #app {
 .el-cascader-panel{ 
   height: 300px;
 }
+.text {
+  font-size: 14px;
+}
+
+.item {
+  padding: 18px 0;
+}
+.el-breadcrumb {
+  margin-bottom: 15px;
+}
+.el-card {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15) !important;
+}
+.el-table {
+  margin-top: 15px;
+}
+.el-pagination {
+  margin-top: 15px;
+}
+.el-steps {
+  margin-top: 15px;
+}
+.el-step__title {
+  font-size: 13px;
+  line-height: 38px;
+}
+.ql-editor {
+  min-height: 300px;
+}

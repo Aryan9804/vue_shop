@@ -40,7 +40,7 @@
           <!-- 添加参数按钮 -->
           <el-button
             type="primary"
-            size="mini" 
+            size="mini"
             :disabled="selectedCateKeys.length === 3 ? false:true"
             @click="addParamDialogVisible = true">添加参数</el-button>
           <!-- 动态参数的渲染列表 -->
@@ -119,7 +119,7 @@
       </el-tabs>
     </el-card>
     <!-- 添加参数对话框 -->
-    <!-- 
+    <!--
       title: 设置对话框的title，可以通过数据绑定来实现动态展示
       visible: 控制会话框的展示和关闭
       width: 控制对话框的宽度
@@ -131,7 +131,7 @@
       width="50%"
       @close="addDialogClosed">
       <!-- 表单数据 -->
-      <!-- 
+      <!--
         :model="addForm"：绑定表单数据
         :rules="addFormRules"：给表单校验设置规则
         ref="addFormRef"：给这个元素标记记号
@@ -156,7 +156,7 @@
       width="50%"
       @close="editDialogClosed">
       <!-- 表单数据 -->
-      <!-- 
+      <!--
         :model="addForm"：绑定表单数据
         :rules="addFormRules"：给表单校验设置规则
         ref="addFormRef"：给这个元素标记记号
@@ -210,7 +210,7 @@ export default {
       addFormRules: {
         attr_name: [
           { required: true, message: '请输入参数名称', trigger: 'blur' }
-        ],
+        ]
       },
       // 控制编辑对话空的显示与隐藏
       editParamDialogVisible: false,
@@ -221,7 +221,7 @@ export default {
       editFormRules: {
         attr_name: [
           { required: true, message: '请输入参数名称', trigger: 'blur' }
-        ],
+        ]
       }
     }
   },
@@ -288,7 +288,7 @@ export default {
     // 控制显示和隐藏对话框
     addParam() {
       // 验证表单是否合法
-      this.$refs.addFormRef.validate( async valid => {
+      this.$refs.addFormRef.validate(async valid => {
         if (!valid) {
           return
         }
@@ -304,7 +304,6 @@ export default {
         // 刷新数据
         this.getData()
         this.$message.success('添加成功！')
-        
       })
     },
     // 对话框关闭时触发该函数
@@ -333,7 +332,7 @@ export default {
         if (!valid) {
           return
         }
-        const { data: res }  = await this.$http.put(`categories/${this.cateId}/attributes/${this.editForm.attr_id}`, {
+        const { data: res } = await this.$http.put(`categories/${this.cateId}/attributes/${this.editForm.attr_id}`, {
           attr_name: this.editForm.attr_name,
           attr_sel: this.activeName
         })
@@ -350,11 +349,11 @@ export default {
     },
     // 删除参数
     async deleteParam(attr_id) {
-      const confirmResult =  await this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).catch(error => error)
+      const confirmResult = await this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).catch(error => error)
 
       if (confirmResult !== 'confirm') {
         return this.$message.info('已取消删除！')
@@ -381,7 +380,7 @@ export default {
       // 关闭输入框
       row.inputVisible = false
       // 前端完成添加之后，需要发送请求将数据持久化到数据库中
-      const{ data: res } = await this.$http.put(`categories/${this.cateId}/attributes/${row.attr_id}`, {
+      const { data: res } = await this.$http.put(`categories/${this.cateId}/attributes/${row.attr_id}`, {
         attr_name: row.attr_name,
         attr_sel: row.attr_sel,
         attr_vals: row.attr_vals.join(' ')
@@ -396,12 +395,12 @@ export default {
       // 让文本框自动获得焦点
       // $nextTick方法的作用，当页面元素被重新渲染之后，才会指定回调函数中的代码
       this.$nextTick(_ => {
-          this.$refs.saveTagInput.$refs.input.focus();
-        });
+        this.$refs.saveTagInput.$refs.input.focus()
+      })
     },
     // 将对attr_vals的操作保存到数据库
     async saveAttrValue(row) {
-      const{ data: res } = await this.$http.put(`categories/${this.cateId}/attributes/${row.attr_id}`, {
+      const { data: res } = await this.$http.put(`categories/${this.cateId}/attributes/${row.attr_id}`, {
         attr_name: row.attr_name,
         attr_sel: row.attr_sel,
         attr_vals: row.attr_vals.join(' ')

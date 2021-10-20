@@ -8,6 +8,12 @@ import './assets/css/globel.css'
 import axios from 'axios'
 // 导入vue-table-with-tree-grid组件
 import ZkTable from 'vue-table-with-tree-grid'
+// 导入 vue-quill-editor 组件
+import VueQuillEditor from 'vue-quill-editor'
+// 导入富文本组件的样式
+import 'quill/dist/quill.core.css' // import styles
+import 'quill/dist/quill.snow.css' // for snow theme
+import 'quill/dist/quill.bubble.css' // for bubble theme
 // 设置访问基本路径
 axios.defaults.baseURL = 'http://timemeetyou.com:8889/api/private/v1/'
 axios.interceptors.request.use(config => {
@@ -21,6 +27,21 @@ Vue.prototype.$http = axios
 Vue.config.productionTip = false
 // 注册
 Vue.component('ZkTable', ZkTable)
+// 全局注册富文本组件
+Vue.use(VueQuillEditor)
+// 注册一个数据过滤器
+Vue.filter('dateFormat', function(originVal) {
+  const dt = new Date(originVal)
+  const year = dt.getFullYear()
+  // 因为月份返回的是从0-11 所以需要手动加1
+  // padStart 当不足两位数时，已0来填充
+  const month = (dt.getMonth() + 1 + '').padStart(2, '0')
+  const day = (dt.getDate() + '').padStart(2, '0')
+  const hours = (dt.getHours() + '').padStart(2, '0')
+  const minutes = (dt.getMinutes() + '').padStart(2, '0')
+  const seconds = (dt.getSeconds() + '').padStart(2, '0')
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
+})
 
 new Vue({
   router,
