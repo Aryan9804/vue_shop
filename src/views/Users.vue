@@ -433,7 +433,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$http.delete(`/users/` + id).then((response) => {
+        this.$http.delete('/users/' + id).then((response) => {
           if (response.data.meta.status !== 200) {
             return this.$message.error(response.data.meta.msg)
           }
@@ -455,7 +455,7 @@ export default {
     },
     async setRole(userInfo) {
       this.userInfo = userInfo
-      const { data: res } = await this.$http.get(`roles`)
+      const { data: res } = await this.$http.get('roles')
       if (res.meta.status !== 200) {
         return this.$message.error('获取角色列表失败！')
       }

@@ -312,8 +312,8 @@ export default {
       this.$refs.addFormRef.resetFields()
     },
     // 监听编辑的函数
-    async showEditDialog(attr_id) {
-      const { data: res } = await this.$http.get(`categories/${this.cateId}/attributes/${attr_id}`)
+    async showEditDialog(attrId) {
+      const { data: res } = await this.$http.get(`categories/${this.cateId}/attributes/${attrId}`)
       if (res.meta.status !== 200) {
         return this.$message.error('获取参数数据失败！')
       }
@@ -348,7 +348,7 @@ export default {
       })
     },
     // 删除参数
-    async deleteParam(attr_id) {
+    async deleteParam(attrId) {
       const confirmResult = await this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -358,7 +358,7 @@ export default {
       if (confirmResult !== 'confirm') {
         return this.$message.info('已取消删除！')
       }
-      const { data: res } = await this.$http.delete(`categories/${this.cateId}/attributes/${attr_id}`)
+      const { data: res } = await this.$http.delete(`categories/${this.cateId}/attributes/${attrId}`)
       if (res.meta.status !== 200) {
         return this.$message.error('删除失败！')
       }

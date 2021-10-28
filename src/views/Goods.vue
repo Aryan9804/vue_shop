@@ -81,7 +81,7 @@ export default {
   methods: {
     // 根据分页获取对应的商品列表
     async getGoodsList() {
-      const { data: res } = await this.$http.get(`/goods`, {
+      const { data: res } = await this.$http.get('/goods', {
         params: this.queryInfo
       })
       if (res.meta.status !== 200) {
@@ -90,7 +90,6 @@ export default {
       this.$message.success('获取商品列表数据成功！')
       this.goodsList = res.data.goods
       this.total = res.data.total
-
     },
     // pageSize 改变时会触发 每页条数
     handleSizeChange(newSize) {
@@ -116,7 +115,7 @@ export default {
         type: 'warning'
       }).catch(error => error)
       if (confirmResult !== 'confirm') {
-        return this.$message.info("已取消删除！")
+        return this.$message.info('已取消删除！')
       }
       const { data: res } = await this.$http.delete(`goods/${id}`)
       if (res.meta.status !== 200) {

@@ -10,15 +10,30 @@ import axios from 'axios'
 import ZkTable from 'vue-table-with-tree-grid'
 // 导入 vue-quill-editor 组件
 import VueQuillEditor from 'vue-quill-editor'
+// 导入 nprogress 组件
+import NProgress from 'nprogress'
+// 导入 nprogress 对应的 js
+import 'nprogress/nprogress.css'
+
 // 导入富文本组件的样式
 import 'quill/dist/quill.core.css' // import styles
 import 'quill/dist/quill.snow.css' // for snow theme
 import 'quill/dist/quill.bubble.css' // for bubble theme
 // 设置访问基本路径
 axios.defaults.baseURL = 'http://timemeetyou.com:8889/api/private/v1/'
+// 在 request 拦截器中，展示进度条 NProgress。start().
+
 axios.interceptors.request.use(config => {
+  // 开启进度条
+  NProgress.start()
   config.headers.Authorization = sessionStorage.getItem('token')
   // console.log(config);
+  return config
+})
+// 在 response 拦截器中，隐藏 NProgress 进度条 NProgress。done()
+axios.interceptors.response.use(config => {
+  // 隐藏进度条
+  NProgress.done()
   return config
 })
 // 在Vue的原型上添加一个属性，让每一个组件都能访问到http来使用axios

@@ -1,17 +1,33 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '../components/Login.vue'
-import Home from '../components/Home.vue'
-import Welcome from '../components/Welcome.vue'
-import Users from '../views/Users.vue'
-import Roles from '../views/Roles.vue'
-import Rights from '../views/Rights.vue'
-import Goods from '../views/Goods.vue'
-import Params from '../views/Params.vue'
-import Categories from '../views/Categories.vue'
-import Orders from '../views/Orders.vue'
-import Reports from '../views/Reports.vue'
-import Add from '../views/Add.vue'
+// import Login from '../components/Login.vue'
+// import Home from '../components/Home.vue'
+// import Welcome from '../components/Welcome.vue'
+// import Users from '../views/Users.vue'
+// import Roles from '../views/Roles.vue'
+// import Rights from '../views/Rights.vue'
+// import Goods from '../views/Goods.vue'
+// import Params from '../views/Params.vue'
+// import Categories from '../views/Categories.vue'
+// import Orders from '../views/Orders.vue'
+// import Reports from '../views/Reports.vue'
+// import Add from '../views/Add.vue'
+// 使用路由懒加载，提高性能
+// 可以选择这种形式
+// const Cate=()=>import("../components/goods/Cate")
+// 不需要什么插件，直接可以实现懒加载
+const Login = () => import('../components/Login.vue')
+const Home = () => import('../components/Home.vue')
+const Welcome = () => import('../components/Welcome.vue')
+const Users = () => import('../views/Users.vue')
+const Roles = () => import('../views/Roles.vue')
+const Rights = () => import('../views/Rights.vue')
+const Goods = () => import('../views/Goods.vue')
+const Params = () => import('../views/Params.vue')
+const Categories = () => import('../views/Categories.vue')
+const Orders = () => import('../views/Orders.vue')
+const Reports = () => import('../views/Reports.vue')
+const Add = () => import('../views/Add.vue')
 
 Vue.use(VueRouter)
 

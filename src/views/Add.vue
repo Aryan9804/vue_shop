@@ -176,7 +176,7 @@ export default {
         ]
       },
       //  商品分类列表
-      cateList: [],
+      cateList: []
       //  cateProps: {
       //    label: 'cat_name',
       //    value: 'cat_id',
@@ -189,7 +189,7 @@ export default {
   },
   methods: {
     async getCateList() {
-      const { data: res } = await this.$http.get(`categories`)
+      const { data: res } = await this.$http.get('categories')
       if (res.meta.status !== 200) {
         return this.$message.error('获取商品分类数据失败！')
       }
@@ -209,32 +209,29 @@ export default {
         // 返回 false 将阻止跳转
         return false
       }
-
     },
     // tab 被选中时触发
     async tabClick() {
       if (this.activeIndex === '1') {
-        const {data: res} = await this.$http.get(`categories/${this.addForm.goods_cat[2]}/attributes`, {
-          params: { sel: 'many' }})
-          if (res.meta.status !== 200) {
-            return this.$message.error('获取分类数据失败！')
-          }
-          this.$message.success('获取分类数据成功！')
-          console.log(res.data)
-          res.data.forEach(item => {
-            item.attr_vals = item.attr_vals.length === 0 ? [] : item.attr_vals.splice(' ')
-          })
-          // 保存动态参数列表数据
-          this.manyTableData = res.data
-      } else if(this.activeIndex === '2'){
-        const {data: res} = await this.$http.get(`categories/${this.addForm.goods_cat[2]}/attributes`, {
-          params: { sel: 'only' }})
-          if (res.meta.status !== 200) {
-            return this.$message.error('获取静态属性失败！')
-          }
-          console.log(res.data)
-          // 保存静态属性
-          this.onlyTableData = res.data
+        const { data: res } = await this.$http.get(`categories/${this.addForm.goods_cat[2]}/attributes`, { params: { sel: 'many' } })
+        if (res.meta.status !== 200) {
+          return this.$message.error('获取分类数据失败！')
+        }
+        this.$message.success('获取分类数据成功！')
+        console.log(res.data)
+        res.data.forEach(item => {
+          item.attr_vals = item.attr_vals.length === 0 ? [] : item.attr_vals.splice(' ')
+        })
+        // 保存动态参数列表数据
+        this.manyTableData = res.data
+      } else if (this.activeIndex === '2') {
+        const { data: res } = await this.$http.get(`categories/${this.addForm.goods_cat[2]}/attributes`, { params: { sel: 'only' } })
+        if (res.meta.status !== 200) {
+          return this.$message.error('获取静态属性失败！')
+        }
+        console.log(res.data)
+        // 保存静态属性
+        this.onlyTableData = res.data
       }
     },
     // 预览图片
@@ -246,9 +243,7 @@ export default {
     handleRemove(file) {
       // 拿到要移除的图片路径
       const filePath = file.response.data.tmp_path
-      const index = this.addForm.pics.findIndex(x => {
-        x.pic === filePath
-      })
+      const index = this.addForm.pics.findIndex(x => x.pic === filePath)
       this.addForm.pics.splice(index, 1)
     },
     // 监听图片上传成功的事件
@@ -261,7 +256,7 @@ export default {
     // 添加商品
     add() {
       console.log(this.addForm)
-      this.$refs.addFormRef.validate( async valid => {
+      this.$refs.addFormRef.validate(async valid => {
         if (!valid) {
           return this.$message.error('请填写必要的添加表单项')
         }
@@ -272,7 +267,7 @@ export default {
         // 处理动态参数
         this.manyTableData.forEach(item => {
           const newInfo = {
-            attr_id: item.attr_id, 
+            attr_id: item.attr_id,
             attr_value: item.attr_vals.join(' ')
           }
           this.addForm.attrs.push(newInfo)
@@ -280,7 +275,7 @@ export default {
         // 处理静态属性
         this.onlyTableData.forEach(item => {
           const newInfo = {
-            attr_id: item.attr_id, 
+            attr_id: item.attr_id,
             attr_value: item.attr_vals
           }
           this.addForm.attrs.push(newInfo)

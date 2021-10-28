@@ -217,7 +217,6 @@ export default {
         this.addCateForm.cat_pid = this.selectedKeys[this.selectedKeys.length - 1]
         this.addCateForm.cat_level = this.selectedKeys.length
         // 终止程序
-        return
       } else {
         // 如果没有走上面的if，则证明用户没有选中父级分类
         this.addCateForm.cat_pid = 0
@@ -226,7 +225,7 @@ export default {
     },
     // 点击按钮，添加新的分类
     addCate() {
-      this.$refs.addCateFormRef.validate( async valid => {
+      this.$refs.addCateFormRef.validate(async valid => {
         if (!valid) {
           return
         }

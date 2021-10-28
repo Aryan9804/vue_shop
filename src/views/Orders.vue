@@ -89,12 +89,12 @@
 </template>
 
 <script>
-import cityData from './citydata.js'
+import cityData from '../assets/citydata.js'
 export default {
   name: 'Orders',
   data () {
     return {
-      
+
       // 查询对象
       queryInfo: {
         // 查询条件
@@ -118,7 +118,7 @@ export default {
       options: [{
         value: '选项1',
         label: '成都'
-      },{
+      }, {
         value: '选项2',
         label: '贵阳'
       }],
@@ -147,9 +147,9 @@ export default {
   },
   methods: {
     async getOrdersList() {
-      const { data: res } = await this.$http.get(`/orders`, {
+      const { data: res } = await this.$http.get('/orders', {
         params: this.queryInfo
-        })
+      })
       if (res.meta.status !== 200) {
         return this.$message.error('订单列表数据获取失败！')
       }
@@ -195,7 +195,7 @@ export default {
       this.progressInfo = res.data
     }
   }
-  
+
 }
 </script>
 
